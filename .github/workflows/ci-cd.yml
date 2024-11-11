@@ -32,9 +32,9 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker build -t lucky2728/frontend-app:latest ./frontend
+          docker build -t lucky2728/frontend-app:latest frontend
           docker push lucky2728/frontend-app:latest
-          docker build -t lucky2728/backend-app:latest ./backend
+          docker build -t lucky2728/backend-app:latest backend
           docker push lucky2728/backend-app:latest
 
       - name: Deploy to Kubernetes

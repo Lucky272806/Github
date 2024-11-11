@@ -1,16 +1,28 @@
-FROM node:14.17.0
+# Build Stage
+FROM node:14.17.0 as build
 
-# Set the working directory
+# Set the working directory for the build stage
 WORKDIR /usr/src/app
 
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm install
 
-# Copy the rest of the app source code
+# Install dependencies using npm ci for a cleaner install
+RUN npm ci
+
+# Copy the rest of the application code
 COPY . .
 
-# Expose the port your app will run on
+# Production Stage (smaller image)
+FROM node:14.17.0
+
+# Set the working directory for the runtime container
+WORKDIR /usr/src/app
+
+# Copy only the necessary files from the build stage
+COPY --from=build /usr/src/app /usr/src/app
+
+# Expose the port for the backend
 EXPOSE 3000
 
 # Start the backend server

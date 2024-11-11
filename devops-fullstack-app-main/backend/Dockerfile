@@ -8,7 +8,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies using npm ci for a cleaner install
-RUN npm ci
+RUN npm ci --verbose
+#RUN npm install --registry=https://registry.npmjs.org/
+
 
 # Copy the rest of the application code
 COPY . .

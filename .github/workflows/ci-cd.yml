@@ -37,12 +37,12 @@ jobs:
       # Step 5: Build and push frontend Docker image
       - name: Build and push frontend Docker image
         run: |
-          docker buildx build -t lucky2728/frontend-app:latest -f ./frontend/Dockerfile ./frontend --push
+          docker buildx build -t lucky2728/frontend-app:latest -f devops-fullstack-app-main/frontend/Dockerfile ./frontend --push
 
       # Step 6: Build and push backend Docker imag
       - name: Build and push backend Docker image
         run: |
-          docker buildx build -t lucky2728/backend-app:latest -f ./backend/Dockerfile ./backend --push
+          docker buildx build -t lucky2728/backend-app:latest -f devops-fullstack-app-main/backend/Dockerfile ./backend --push
 
       # Step 7: Deploy to Kubernetes
       - name: Deploy to Kubernetes
